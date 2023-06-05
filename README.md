@@ -7,7 +7,7 @@
 	<br>
 </h1>
 
-# ULID for [Deno](https://deno.com/runtime)
+# [ULID](https://github.com/ulid/spec) for [Deno](https://deno.com/runtime)
 
 ULID is an alternative to UUID with the following features:
 
