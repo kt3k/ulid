@@ -25,7 +25,7 @@ ULID is an alternative to UUID with the following features:
 ## Import
 
 ```js
-import { ulid } from "https://TBD";
+import { ulid } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ import { ulid } from "https://TBD";
 To generate a ULID, simply run the function:
 
 ```js
-import { ulid } from "ulid";
+import { ulid } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
 
 ulid(); // 01ARZ3NDEKTSV4RRFFQ69G5FAV
 ```
@@ -55,7 +55,7 @@ _Note that the same seed time is being passed in for this example to demonstrate
 its behaviour when generating multiple ULIDs within the same millisecond_
 
 ```js
-import { monotonicFactory } from "ulid";
+import { monotonicFactory } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
 
 const ulid = monotonicFactory();
 
@@ -76,7 +76,7 @@ To use your own pseudo-random number generator, import the factory, and pass it
 your generator function.
 
 ```js
-import { factory } from "ulid";
+import { factory } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
 import prng from "somewhere";
 
 const ulid = factory(prng);
@@ -87,7 +87,7 @@ ulid(); // 01BXAVRG61YJ5YSBRM51702F6M
 You can also pass in a `prng` to the `monotonicFactory` function.
 
 ```js
-import { monotonicFactory } from "ulid";
+import { monotonicFactory } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
 import prng from "somewhere";
 
 const ulid = monotonicFactory(prng);
