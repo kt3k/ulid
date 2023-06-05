@@ -42,7 +42,7 @@ Deno.test("ulid", async (t) => {
     });
 
     await t.step("throws when it cannot increment", () => {
-      assertThrows(function () {
+      assertThrows(() => {
         ULID.incrementBase32("ZZZ");
       });
     });
@@ -84,7 +84,7 @@ Deno.test("ulid", async (t) => {
 
     await t.step("should throw an error", async (t) => {
       await t.step("if time greater than (2 ^ 48) - 1", () => {
-        assertThrows(function () {
+        assertThrows(() => {
           ULID.encodeTime(Math.pow(2, 48), 8);
         }, Error);
       });
@@ -96,20 +96,20 @@ Deno.test("ulid", async (t) => {
         }, Error);
       });
 
-      await t.step("if time is infinity", function () {
-        assertThrows(function () {
+      await t.step("if time is infinity", () => {
+        assertThrows(() => {
           ULID.encodeTime(Infinity);
         }, Error);
       });
 
-      await t.step("if time is negative", function () {
-        assertThrows(function () {
+      await t.step("if time is negative", () => {
+        assertThrows(() => {
           ULID.encodeTime(-1);
         }, Error);
       });
 
-      await t.step("if time is a float", function () {
-        assertThrows(function () {
+      await t.step("if time is a float", () => {
+        assertThrows(() => {
           ULID.encodeTime(100.1);
         }, Error);
       });
@@ -119,59 +119,59 @@ Deno.test("ulid", async (t) => {
   await t.step("encodeRandom", async (t) => {
     const prng = ULID.detectPrng();
 
-    await t.step("should return correct length", function () {
+    await t.step("should return correct length", () => {
       assertEquals(12, ULID.encodeRandom(12, prng).length);
     });
   });
 
-  await t.step("decodeTime", async function (t) {
-    await t.step("should return correct timestamp", function () {
+  await t.step("decodeTime", async (t) => {
+    await t.step("should return correct timestamp", () => {
       const timestamp = Date.now();
       const id = ulid(timestamp);
       assertEquals(timestamp, ULID.decodeTime(id));
     });
 
-    await t.step("should accept the maximum allowed timestamp", function () {
+    await t.step("should accept the maximum allowed timestamp", () => {
       assertEquals(
         281474976710655,
         ULID.decodeTime("7ZZZZZZZZZZZZZZZZZZZZZZZZZ"),
       );
     });
 
-    await t.step("should reject", async function (t) {
-      await t.step("malformed strings of incorrect length", function () {
-        assertThrows(function () {
+    await t.step("should reject", async (t) => {
+      await t.step("malformed strings of incorrect length", () => {
+        assertThrows(() => {
           ULID.decodeTime("FFFF");
         }, Error);
       });
 
-      await t.step("strings with timestamps that are too high", function () {
-        assertThrows(function () {
+      await t.step("strings with timestamps that are too high", () => {
+        assertThrows(() => {
           ULID.decodeTime("80000000000000000000000000");
         }, Error);
       });
     });
   });
 
-  await t.step("ulid", async function (t) {
-    await t.step("should return correct length", function () {
+  await t.step("ulid", async (t) => {
+    await t.step("should return correct length", () => {
       assertEquals(26, ulid().length);
     });
 
     await t.step(
       "should return expected encoded time component result",
-      function () {
+      () => {
         assertEquals("01ARYZ6S41", ulid(1469918176385).substring(0, 10));
       },
     );
   });
 
-  await t.step("monotonicity", async function (t) {
+  await t.step("monotonicity", async (t) => {
     function stubbedPrng() {
       return 0.96;
     }
 
-    await t.step("without seedTime", async function (t) {
+    await t.step("without seedTime", async (t) => {
       const stubbedUlid = ULID.monotonicFactory(stubbedPrng);
 
       const clock = lolex.install({
@@ -179,44 +179,44 @@ Deno.test("ulid", async (t) => {
         toFake: ["Date"],
       });
 
-      await t.step("first call", function () {
+      await t.step("first call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYYY", stubbedUlid());
       });
 
-      await t.step("second call", function () {
+      await t.step("second call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYYZ", stubbedUlid());
       });
 
-      await t.step("third call", function () {
+      await t.step("third call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYZ0", stubbedUlid());
       });
 
-      await t.step("fourth call", function () {
+      await t.step("fourth call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYZ1", stubbedUlid());
       });
 
       clock.uninstall();
     });
 
-    await t.step("with seedTime", async function (t) {
+    await t.step("with seedTime", async (t) => {
       const stubbedUlid = ULID.monotonicFactory(stubbedPrng);
 
-      await t.step("first call", function () {
+      await t.step("first call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYYY", stubbedUlid(1469918176385));
       });
 
-      await t.step("second call with the same", function () {
+      await t.step("second call with the same", () => {
         assert.strictEqual(
           "01ARYZ6S41YYYYYYYYYYYYYYYZ",
           stubbedUlid(1469918176385),
         );
       });
 
-      await t.step("third call with less than", function () {
+      await t.step("third call with less than", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYZ0", stubbedUlid(100000000));
       });
 
-      await t.step("fourth call with even more less than", function () {
+      await t.step("fourth call with even more less than", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYZ1", stubbedUlid(10000));
       });
 

@@ -126,24 +126,16 @@ export function detectPrng(): PRNG {
   };
 }
 
-export function factory(currPrng?: PRNG): ULID {
-  const prng = currPrng ?? detectPrng();
-  return function ulid(seedTime?: number): string {
-    if (seedTime === undefined) {
-      seedTime = Date.now();
-    }
+export function factory(prng: PRNG = detectPrng()): ULID {
+  return function ulid(seedTime: number = Date.now()): string {
     return encodeTime(seedTime, TIME_LEN) + encodeRandom(RANDOM_LEN, prng);
   };
 }
 
-export function monotonicFactory(currPrng?: PRNG): ULID {
-  const prng = currPrng ?? detectPrng();
+export function monotonicFactory(prng: PRNG = detectPrng()): ULID {
   let lastTime = 0;
   let lastRandom: string;
-  return function ulid(seedTime?: number): string {
-    if (seedTime === undefined) {
-      seedTime = Date.now();
-    }
+  return function ulid(seedTime: number = Date.now()): string {
     if (seedTime <= lastTime) {
       const incrementedRandom = (lastRandom = incrementBase32(lastRandom));
       return encodeTime(lastTime, TIME_LEN) + incrementedRandom;
