@@ -1,10 +1,5 @@
-<h1 align="center">
-	<br>
-	<br>
-	<img width="360" src="logo.png" alt="ulid">
-	<br>
-	<br>
-	<br>
+<h1>
+  <img width="180" src="logo.png" alt="ulid">
 </h1>
 
 # [ULID](https://github.com/ulid/spec) for [Deno](https://deno.com/runtime)
