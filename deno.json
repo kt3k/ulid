@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "cov": "deno test --coverage=cov && deno coverage --lcov cov > cov/lcov.info",
+    "cov:html": "deno task cov && genhtml cov/lcov.info -o cov/html && open cov/html/index.html"
+  }
+}
