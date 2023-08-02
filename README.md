@@ -4,6 +4,9 @@
 
 # [ULID](https://github.com/ulid/spec) for [Deno](https://deno.com/runtime)
 
+[![ci](https://github.com/kt3k/ulid/actions/workflows/ci.yml/badge.svg)](https://github.com/kt3k/ulid/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/kt3k/ulid/branch/main/graph/badge.svg?token=okdKJphcWc)](https://codecov.io/gh/kt3k/ulid)
+
 ULID is an alternative to UUID with the following features:
 
 - 128-bit compatibility with UUID
