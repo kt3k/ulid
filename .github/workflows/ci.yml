@@ -11,3 +11,5 @@ jobs:
       - run: deno fmt --check
       - run: deno lint
       - run: deno test
+      - run: deno task cov
+      - uses: codecov/codecov-action@v3
