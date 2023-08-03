@@ -1,12 +1,13 @@
 // Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT license.
 // Copyright 2017 Alizain Feerasta. All rights reserved. MIT license.
 
-import assert from "node:assert";
-import lolex from "npm:lolex";
+import { FakeTime } from "std/testing/time.ts";
 import {
+  assert,
   assertEquals,
+  assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@0.190.0/testing/asserts.ts";
+} from "std/assert/mod.ts";
 
 import * as ULID from "./mod.ts";
 const ulid = ULID.factory();
@@ -174,10 +175,7 @@ Deno.test("ulid", async (t) => {
     await t.step("without seedTime", async (t) => {
       const stubbedUlid = ULID.monotonicFactory(stubbedPrng);
 
-      const clock = lolex.install({
-        now: 1469918176385,
-        toFake: ["Date"],
-      });
+      const time = new FakeTime(1469918176385);
 
       await t.step("first call", () => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYYY", stubbedUlid());
@@ -195,7 +193,7 @@ Deno.test("ulid", async (t) => {
         assertEquals("01ARYZ6S41YYYYYYYYYYYYYYZ1", stubbedUlid());
       });
 
-      clock.uninstall();
+      time.restore();
     });
 
     await t.step("with seedTime", async (t) => {
@@ -206,7 +204,7 @@ Deno.test("ulid", async (t) => {
       });
 
       await t.step("second call with the same", () => {
-        assert.strictEqual(
+        assertStrictEquals(
           "01ARYZ6S41YYYYYYYYYYYYYYYZ",
           stubbedUlid(1469918176385),
         );
