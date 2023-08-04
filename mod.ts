@@ -28,7 +28,7 @@ const TIME_LEN = 10;
 const RANDOM_LEN = 16;
 
 export function replaceCharAt(str: string, index: number, char: string) {
-  return str.substr(0, index) + char + str.substr(index + 1);
+  return str.substring(0, index) + char + str.substring(index + 1);
 }
 
 export function incrementBase32(str: string): string {
