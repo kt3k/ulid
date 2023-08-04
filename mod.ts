@@ -116,13 +116,7 @@ export function decodeTime(id: string): number {
 }
 
 /** @deprecated Use `Math.random()` instead */
-export function detectPrng(): PRNG {
-  return () => {
-    const buffer = new Uint8Array(1);
-    crypto.getRandomValues(buffer);
-    return buffer[0] / 0xff;
-  };
-}
+export const detectPrng: PRNG = Math.random;
 
 export function factory(prng: PRNG = Math.random): ULID {
   return function ulid(seedTime: number = Date.now()): string {
