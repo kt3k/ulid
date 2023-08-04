@@ -59,10 +59,7 @@ export function incrementBase32(str: string): string {
 }
 
 export function randomChar(prng: PRNG): string {
-  let rand = Math.floor(prng() * ENCODING_LEN);
-  if (rand === ENCODING_LEN) {
-    rand = ENCODING_LEN - 1;
-  }
+  const rand = Math.floor(prng() * ENCODING_LEN);
   return ENCODING.charAt(rand);
 }
 
