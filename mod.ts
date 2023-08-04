@@ -28,19 +28,15 @@ const TIME_LEN = 10;
 const RANDOM_LEN = 16;
 
 export function replaceCharAt(str: string, index: number, char: string) {
-  if (index > str.length - 1) {
-    return str;
-  }
-  return str.substr(0, index) + char + str.substr(index + 1);
+  return str.substring(0, index) + char + str.substring(index + 1);
 }
 
 export function incrementBase32(str: string): string {
-  let done: string | undefined = undefined;
   let index = str.length;
   let char;
   let charIndex;
   const maxCharIndex = ENCODING_LEN - 1;
-  while (!done && index-- >= 0) {
+  while (index-- >= 0) {
     char = str[index];
     charIndex = ENCODING.indexOf(char);
     if (charIndex === -1) {
@@ -50,10 +46,7 @@ export function incrementBase32(str: string): string {
       str = replaceCharAt(str, index, ENCODING[0]);
       continue;
     }
-    done = replaceCharAt(str, index, ENCODING[charIndex + 1]);
-  }
-  if (typeof done === "string") {
-    return done;
+    return replaceCharAt(str, index, ENCODING[charIndex + 1]);
   }
   throw createError("cannot increment this string");
 }
@@ -67,9 +60,6 @@ export function randomChar(prng: PRNG): string {
 }
 
 export function encodeTime(now: number, len: number = TIME_LEN): string {
-  if (isNaN(now)) {
-    throw new Error(now + " must be a number");
-  }
   if (now > TIME_MAX) {
     throw createError("cannot encode time greater than " + TIME_MAX);
   }
@@ -79,11 +69,10 @@ export function encodeTime(now: number, len: number = TIME_LEN): string {
   if (Number.isInteger(now) === false) {
     throw createError("time must be an integer");
   }
-  let mod;
   let str = "";
   for (; len > 0; len--) {
-    mod = now % ENCODING_LEN;
-    str = ENCODING.charAt(mod) + str;
+    const mod = now % ENCODING_LEN;
+    str = ENCODING[mod] + str;
     now = (now - mod) / ENCODING_LEN;
   }
   return str;
@@ -102,7 +91,7 @@ export function decodeTime(id: string): number {
     throw createError("malformed ulid");
   }
   const time = id
-    .substr(0, TIME_LEN)
+    .substring(0, TIME_LEN)
     .split("")
     .reverse()
     .reduce((carry, char, index) => {
