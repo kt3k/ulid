@@ -31,7 +31,7 @@ export function replaceCharAt(str: string, index: number, char: string) {
   if (index > str.length - 1) {
     return str;
   }
-  return str.substr(0, index) + char + str.substr(index + 1);
+  return str.substring(0, index) + char + str.substring(index + 1);
 }
 
 export function incrementBase32(str: string): string {
@@ -102,7 +102,7 @@ export function decodeTime(id: string): number {
     throw createError("malformed ulid");
   }
   const time = id
-    .substr(0, TIME_LEN)
+    .substring(0, TIME_LEN)
     .split("")
     .reverse()
     .reduce((carry, char, index) => {
