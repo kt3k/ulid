@@ -90,11 +90,7 @@ export function encodeTime(now: number, len: number = TIME_LEN): string {
 }
 
 export function encodeRandom(len: number, prng: PRNG): string {
-  let str = "";
-  for (; len > 0; len--) {
-    str = randomChar(prng) + str;
-  }
-  return str;
+  return randomChar(prng).repeat(len);
 }
 
 export function decodeTime(id: string): number {
