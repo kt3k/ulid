@@ -118,6 +118,7 @@ export function decodeTime(id: string): number {
   return time;
 }
 
+/** @deprecated Use `Math.random()` instead */
 export function detectPrng(): PRNG {
   return () => {
     const buffer = new Uint8Array(1);
@@ -126,13 +127,13 @@ export function detectPrng(): PRNG {
   };
 }
 
-export function factory(prng: PRNG = detectPrng()): ULID {
+export function factory(prng: PRNG = Math.random): ULID {
   return function ulid(seedTime: number = Date.now()): string {
     return encodeTime(seedTime, TIME_LEN) + encodeRandom(RANDOM_LEN, prng);
   };
 }
 
-export function monotonicFactory(prng: PRNG = detectPrng()): ULID {
+export function monotonicFactory(prng: PRNG = Math.random): ULID {
   let lastTime = 0;
   let lastRandom: string;
   return function ulid(seedTime: number = Date.now()): string {

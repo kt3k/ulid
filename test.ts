@@ -13,7 +13,7 @@ const ulid = ULID.factory();
 
 Deno.test("ulid", async (t) => {
   await t.step("prng", async (t) => {
-    const prng = ULID.detectPrng();
+    const prng = Math.random;
 
     await t.step("should produce a number", () => {
       assertEquals(false, isNaN(prng()));
@@ -50,7 +50,7 @@ Deno.test("ulid", async (t) => {
 
   await t.step("randomChar", async (t) => {
     const sample: Record<string, number> = {};
-    const prng = ULID.detectPrng();
+    const prng = Math.random;
 
     for (let x = 0; x < 320000; x++) {
       const char = String(ULID.randomChar(prng)); // for if it were to ever return undefined
@@ -117,7 +117,7 @@ Deno.test("ulid", async (t) => {
   });
 
   await t.step("encodeRandom", async (t) => {
-    const prng = ULID.detectPrng();
+    const prng = Math.random;
 
     await t.step("should return correct length", () => {
       assertEquals(12, ULID.encodeRandom(12, prng).length);

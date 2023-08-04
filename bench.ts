@@ -3,14 +3,12 @@
 
 import * as ulid from "./mod.ts";
 
-const prng = ulid.detectPrng();
-
 Deno.bench("encodeTime", function () {
   ulid.encodeTime(1469918176385);
 });
 
 Deno.bench("encodeRandom", function () {
-  ulid.encodeRandom(10, prng);
+  ulid.encodeRandom(10, Math.random);
 });
 
 Deno.bench("generate", function () {
