@@ -150,6 +150,12 @@ Deno.test("ulid", async (t) => {
           ULID.decodeTime("80000000000000000000000000");
         }, Error);
       });
+
+      await t.step("invalid character", () => {
+        assertThrows(() => {
+          ULID.decodeTime("&1ARZ3NDEKTSV4RRFFQ69G5FAV");
+        }, Error);
+      });
     });
   });
 
