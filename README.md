@@ -114,13 +114,12 @@ deno bench
 ```
 
 ```
-cpu: Apple M1
-runtime: deno 1.34.1 (aarch64-apple-darwin)
+cpu: Apple M2
+runtime: deno 1.36.0 (aarch64-apple-darwin)
 
-file:///Users/kt3k/oss/ulid/bench.ts
-benchmark         time (avg)             (min … max)       p75       p99      p995
----------------------------------------------------- -----------------------------
-encodeTime    378.13 ns/iter(324.22 ns … 432.38 ns) 387.6 ns 418.98 ns 432.38 ns
-encodeRandom  1.72 µs/iter(1.68 µs … 1.79 µs) 1.74 µs 1.79 µs 1.79 µs
-generate      3.08 µs/iter(3.03 µs … 3.32 µs) 3.07 µs 3.32 µs 3.32 µs
+benchmark         time (avg)        iter/s             (min … max)       p75       p99      p995
+------------------------------------------------------------------ -----------------------------
+encodeTime       303.42 ns/iter   3,295,776.1  (299.3 ns … 330.98 ns) 304.59 ns 326.78 ns 330.98 ns
+encodeRandom     577.64 ns/iter   1,731,186.6 (337.92 ns … 738.33 ns) 640.61 ns 738.33 ns 738.33 ns
+generate         670.84 ns/iter   1,490,678.9 (612.39 ns … 721.08 ns) 694.94 ns 721.08 ns 721.08 ns
 ```
