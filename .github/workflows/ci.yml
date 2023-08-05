@@ -8,6 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
+        with:
+          deno-version: canary
       - run: deno fmt --check
       - run: deno lint
       - run: deno test
