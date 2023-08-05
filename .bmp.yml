@@ -1,4 +1,4 @@
-version: 0.2.1
+version: 0.2.2
 commit: v%.%.%
 files:
   README.md: 'https://deno.land/x/ulid@v%.%.%/mod.ts'
