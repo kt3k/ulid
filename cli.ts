@@ -16,40 +16,40 @@ const helpmsg = `
 `;
 
 for (const flag of Object.keys(parsed)) {
-	switch (flag) {
-		case "_":
-			break;
-		case "h":
-		case "help":
-			help = true;
-			break;
-		case "t":
-			if (typeof parsed["t"] === "number") timestamp = parsed["t"];
-			else help = true;
-			break;
-		case "time":
-			if (typeof parsed["time"] === "number") timestamp = parsed["time"];
-			else help = true;
-			break;
-		case "n":
-			if (typeof parsed["n"] === "number") batch = parsed["n"];
-			else help = true;
-			break;
-		case "number":
-			if (typeof parsed["number"] === "number") batch = parsed["number"];
-			else help = true;
-			break;
-		default:
-			console.log("Unknown flag provided.");
-			help = true;
-	}
+  switch (flag) {
+    case "_":
+      break;
+    case "h":
+    case "help":
+      help = true;
+      break;
+    case "t":
+      if (typeof parsed["t"] === "number") timestamp = parsed["t"];
+      else help = true;
+      break;
+    case "time":
+      if (typeof parsed["time"] === "number") timestamp = parsed["time"];
+      else help = true;
+      break;
+    case "n":
+      if (typeof parsed["n"] === "number") batch = parsed["n"];
+      else help = true;
+      break;
+    case "number":
+      if (typeof parsed["number"] === "number") batch = parsed["number"];
+      else help = true;
+      break;
+    default:
+      console.log("Unknown flag provided.");
+      help = true;
+  }
 }
 
 if (!help) {
-	while (batch) {
-		console.log(ulid(timestamp));
-		batch--;
-	}
+  while (batch) {
+    console.log(ulid(timestamp));
+    batch--;
+  }
 } else {
-	console.log(helpmsg);
+  console.log(helpmsg);
 }
