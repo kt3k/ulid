@@ -23,7 +23,7 @@ ULID is an alternative to UUID with the following features:
 ## Import
 
 ```js
-import { ulid } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
+import { ulid } from "https://deno.land/x/ulid@v0.3.0/mod.ts";
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ import { ulid } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
 To generate a ULID, simply run the function:
 
 ```js
-import { ulid } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
+import { ulid } from "https://deno.land/x/ulid@v0.3.0/mod.ts";
 
 ulid(); // 01ARZ3NDEKTSV4RRFFQ69G5FAV
 ```
@@ -53,7 +53,7 @@ _Note that the same seed time is being passed in for this example to demonstrate
 its behaviour when generating multiple ULIDs within the same millisecond_
 
 ```js
-import { monotonicFactory } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
+import { monotonicFactory } from "https://deno.land/x/ulid@v0.3.0/mod.ts";
 
 const ulid = monotonicFactory();
 
@@ -74,7 +74,7 @@ To use your own pseudo-random number generator, import the factory, and pass it
 your generator function.
 
 ```js
-import { factory } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
+import { factory } from "https://deno.land/x/ulid@v0.3.0/mod.ts";
 import prng from "somewhere";
 
 const ulid = factory(prng);
@@ -85,7 +85,7 @@ ulid(); // 01BXAVRG61YJ5YSBRM51702F6M
 You can also pass in a `prng` to the `monotonicFactory` function.
 
 ```js
-import { monotonicFactory } from "https://deno.land/x/ulid@v0.2.2/mod.ts";
+import { monotonicFactory } from "https://deno.land/x/ulid@v0.3.0/mod.ts";
 import prng from "somewhere";
 
 const ulid = monotonicFactory(prng);
